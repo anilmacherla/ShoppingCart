@@ -1,25 +1,17 @@
 package com.philips.shoppingcart.dto;
 
-public class ItemDTO {
+public class CartItemDTO {
+    private Long id;
     private String name;
     private double price;
     private int quantity;
 
-    public double getPrice() {
-        return price;
+    public Long getId() {
+        return id;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-// Getters and Setters
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,5 +20,21 @@ public class ItemDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

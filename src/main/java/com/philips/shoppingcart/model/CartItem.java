@@ -1,17 +1,22 @@
 package com.philips.shoppingcart.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+
 @Entity
-public class Item {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private double price;
     private int quantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    @JsonIgnore
+    private Cart cart;
 
     public Long getId() {
         return id;
@@ -44,5 +49,12 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-// Getters and Setters
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 }
