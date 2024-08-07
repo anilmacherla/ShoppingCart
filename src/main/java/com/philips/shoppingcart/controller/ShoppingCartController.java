@@ -4,8 +4,11 @@ import com.philips.shoppingcart.dto.CartDTO;
 import com.philips.shoppingcart.dto.CartItemDTO;
 import com.philips.shoppingcart.model.Cart;
 import com.philips.shoppingcart.service.CartService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -17,16 +20,19 @@ public class ShoppingCartController {
     private CartService cartService;
 
     @PostMapping("/{userId}/add")
-    public Cart addItemToCart(@PathVariable Long userId, @RequestBody CartItemDTO itemDTO) {
+    @ResponseStatus(HttpStatus.OK)
+    public Cart addItemToCart(@PathVariable Long userId, @Valid @RequestBody CartItemDTO itemDTO) {
         return cartService.addItemToUserCart(userId, itemDTO);
     }
 
     @PostMapping("/{userId}/addItems")
-    public Cart addItemsToCart(@PathVariable Long userId, @RequestBody List<CartItemDTO> itemDTOs) {
+    @ResponseStatus(HttpStatus.OK)
+    public Cart addItemsToCart(@PathVariable Long userId, @Valid @RequestBody List<@Valid CartItemDTO> itemDTOs) {
         return cartService.addItemsToUserCart(userId, itemDTOs);
     }
 
     @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
     public CartDTO getCartByUserId(@PathVariable Long userId) throws Exception {
         return cartService.getCartByUserId(userId);
     }
