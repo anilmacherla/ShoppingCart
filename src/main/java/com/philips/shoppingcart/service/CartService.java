@@ -6,8 +6,12 @@ import com.philips.shoppingcart.model.Cart;
 
 import java.util.List;
 
+
 public interface CartService {
-    Cart addItemToUserCart(Long userId, CartItemDTO itemDTO);
     Cart addItemsToUserCart(Long userId, List<CartItemDTO> itemDTOs);
-    CartDTO getCartByUserId(Long userId) throws Exception;
+    CartDTO getCartByUserId(Long userId);
+    CartDTO getCartByUserIdAndCartId(Long userId, Long cartId) throws Exception;  
+    Cart updateCartItem(Long cartId, Long itemId, CartItemDTO itemDTO) throws Exception;
+    void deleteCartItem(Long cartId, Long itemId) throws Exception;
 }
+

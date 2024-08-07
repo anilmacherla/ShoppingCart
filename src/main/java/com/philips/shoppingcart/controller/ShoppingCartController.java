@@ -19,21 +19,35 @@ public class ShoppingCartController {
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/{userId}/add")
-    @ResponseStatus(HttpStatus.OK)
-    public Cart addItemToCart(@PathVariable Long userId, @Valid @RequestBody CartItemDTO itemDTO) {
-        return cartService.addItemToUserCart(userId, itemDTO);
-    }
-
     @PostMapping("/{userId}/addItems")
     @ResponseStatus(HttpStatus.OK)
     public Cart addItemsToCart(@PathVariable Long userId, @Valid @RequestBody List<@Valid CartItemDTO> itemDTOs) {
         return cartService.addItemsToUserCart(userId, itemDTOs);
     }
 
+    @PutMapping("/{cartId}/items/{itemId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Cart updateCartItem(@PathVariable Long cartId, @PathVariable Long itemId, @Valid @RequestBody CartItemDTO itemDTO) throws Exception {
+        return cartService.updateCartItem(cartId, itemId, itemDTO);
+    }
+
+
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public CartDTO getCartByUserId(@PathVariable Long userId) throws Exception {
+    public CartDTO getCartByUserId(@PathVariable Long userId) {
         return cartService.getCartByUserId(userId);
     }
+
+    @GetMapping("/{userId}/cart/{cartId}")
+    @ResponseStatus(HttpStatus.OK)
+    public CartDTO getCartByUserIdAndCartId(@PathVariable Long userId, @PathVariable Long cartId) throws Exception {
+        return cartService.getCartByUserIdAndCartId(userId, cartId);
+    }
+
+    @DeleteMapping("/{cartId}/items/{itemId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCartItem(@PathVariable Long cartId, @PathVariable Long itemId) throws Exception {
+        cartService.deleteCartItem(cartId, itemId);
+    }
+   
 }
