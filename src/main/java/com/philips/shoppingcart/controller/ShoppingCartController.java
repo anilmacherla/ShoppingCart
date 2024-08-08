@@ -25,13 +25,6 @@ public class ShoppingCartController {
         return cartService.addItemsToUserCart(userId, itemDTOs);
     }
 
-    @PutMapping("/{cartId}/items/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
-    public Cart updateCartItem(@PathVariable Long cartId, @PathVariable Long itemId, @Valid @RequestBody CartItemDTO itemDTO) throws Exception {
-        return cartService.updateCartItem(cartId, itemId, itemDTO);
-    }
-
-
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public CartDTO getCartByUserId(@PathVariable Long userId) {
@@ -44,10 +37,4 @@ public class ShoppingCartController {
         return cartService.getCartByUserIdAndCartId(userId, cartId);
     }
 
-    @DeleteMapping("/{cartId}/items/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteCartItem(@PathVariable Long cartId, @PathVariable Long itemId) throws Exception {
-        cartService.deleteCartItem(cartId, itemId);
-    }
-   
 }
