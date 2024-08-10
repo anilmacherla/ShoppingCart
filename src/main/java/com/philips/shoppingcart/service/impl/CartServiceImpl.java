@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -44,11 +45,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDTO getCartByUserId(Long userId) {
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(() -> new ItemNotFoundException("No cart found for user ID: " + userId));
+    public List<CartDTO> getCartListByUserId(Long userId) {
+        List<Cart> carts = cartRepository.findByUserId(userId);
 
-        return cartMapper.toCartDTO(cart);
+        if (carts.isEmpty()) {
+            throw new ItemNotFoundException("No carts found for user ID: " + userId);
+        }
+
+        return carts.stream().map(cartMapper::toCartDTO).collect(Collectors.toList());
     }
 
     @Override

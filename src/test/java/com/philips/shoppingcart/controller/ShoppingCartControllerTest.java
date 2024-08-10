@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
@@ -67,26 +69,26 @@ class ShoppingCartControllerTest {
         Long userId = 1L;
         CartDTO cartDTO = new CartDTO();
 
-        when(cartService.getCartByUserId(userId)).thenReturn(cartDTO);
+        when(cartService.getCartListByUserId(userId)).thenReturn(List.of( cartDTO));
 
         mockMvc.perform(get("/api/cart/{userId}", userId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{}"));
 
-        verify(cartService, times(1)).getCartByUserId(userId);
+        verify(cartService, times(1)).getCartListByUserId(userId);
     }
 
     @Test
     void testGetCartByUserId_NotFound() throws Exception {
         Long userId = 1L;
 
-        when(cartService.getCartByUserId(userId)).thenThrow(new ItemNotFoundException("No cart found for user ID: " + userId));
+        when(cartService.getCartListByUserId(userId)).thenThrow(new ItemNotFoundException("No cart found for user ID: " + userId));
 
         mockMvc.perform(get("/api/cart/{userId}", userId))
                 .andExpect(status().isNotFound())
                 .andExpect(content().json("{\"message\":\"No cart found for user ID: 1\"}"));
 
-        verify(cartService, times(1)).getCartByUserId(userId);
+        verify(cartService, times(1)).getCartListByUserId(userId);
     }
 
     @Test

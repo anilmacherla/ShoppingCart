@@ -27,8 +27,8 @@ public class ShoppingCartController {
 
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public CartDTO getCartByUserId(@PathVariable Long userId) {
-        return cartService.getCartByUserId(userId);
+    public List<CartDTO> getCartByUserId(@PathVariable Long userId) {
+        return cartService.getCartListByUserId(userId);
     }
 
     @GetMapping("/{userId}/cart/{cartId}")

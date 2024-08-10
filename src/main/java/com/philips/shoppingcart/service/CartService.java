@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CartService {
     Cart addItemsToUserCart(Long userId, List<CartItemDTO> itemDTOs);
-    CartDTO getCartByUserId(Long userId);
+    List<CartDTO> getCartListByUserId(Long userId);
     CartDTO getCartByUserIdAndCartId(Long userId, Long cartId) throws Exception;  
     Cart updateCartItem(Long cartId, Long itemId, CartItemDTO itemDTO) throws Exception;
     void deleteCartItem(Long cartId, Long itemId) throws Exception;
