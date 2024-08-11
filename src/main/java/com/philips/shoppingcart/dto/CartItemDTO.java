@@ -3,7 +3,7 @@ package com.philips.shoppingcart.dto;
 import jakarta.validation.constraints.*;
 
 public class CartItemDTO {
-    private Long id;
+    private Long cartItemId;
     @NotBlank(message = "Name is mandatory")
     private String name;
     @NotNull(message = "Price is mandatory")
@@ -14,11 +14,11 @@ public class CartItemDTO {
     private int quantity;
 
     public Long getId() {
-        return id;
+        return cartItemId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.cartItemId = id;
     }
 
     public String getName() {

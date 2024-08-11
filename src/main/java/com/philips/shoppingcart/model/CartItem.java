@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long cartItemId;
     private String name;
     private double price;
     private int quantity;
@@ -18,12 +18,12 @@ public class CartItem {
     @JsonIgnore
     private Cart cart;
 
-    public Long getId() {
-        return id;
+    public Long getCartItemId() {
+        return cartItemId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCartItemId(Long id) {
+        this.cartItemId = id;
     }
 
     public String getName() {

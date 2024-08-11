@@ -13,14 +13,14 @@ public class CartMapper {
 
     public CartDTO toCartDTO(Cart cart) {
         CartDTO cartDTO = new CartDTO();
-        cartDTO.setId(cart.getId());
+        cartDTO.setCartId(cart.getCartId());
         cartDTO.setItems(cart.getItems().stream().map(this::toCartItemDTO).collect(Collectors.toList()));
         return cartDTO;
     }
 
     public CartItemDTO toCartItemDTO(CartItem item) {
         CartItemDTO itemDTO = new CartItemDTO();
-        itemDTO.setId(item.getId());
+        itemDTO.setId(item.getCartItemId());
         itemDTO.setName(item.getName());
         itemDTO.setPrice(item.getPrice());
         itemDTO.setQuantity(item.getQuantity());

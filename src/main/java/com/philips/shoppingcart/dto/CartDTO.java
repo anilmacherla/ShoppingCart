@@ -3,15 +3,15 @@ package com.philips.shoppingcart.dto;
 import java.util.List;
 
 public class CartDTO {
-    private Long id;
+    private Long cartId;
     private List<CartItemDTO> items;
 
-    public Long getId() {
-        return id;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCartId(Long id) {
+        this.cartId = id;
     }
 
     public List<CartItemDTO> getItems() {

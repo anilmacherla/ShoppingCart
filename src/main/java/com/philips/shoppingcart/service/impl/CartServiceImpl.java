@@ -73,7 +73,7 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new ItemNotFoundException("No cart found with ID: " + cartId));
 
         CartItem item = cart.getItems().stream()
-                .filter(i -> i.getId().equals(itemId))
+                .filter(i -> i.getCartItemId().equals(itemId))
                 .findFirst()
                 .orElseThrow(() -> new ItemNotFoundException("No item found with ID: " + itemId));
 
@@ -90,7 +90,7 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new ItemNotFoundException("No cart found with ID: " + cartId));
 
         CartItem item = cart.getItems().stream()
-                .filter(i -> i.getId().equals(itemId))
+                .filter(i -> i.getCartItemId().equals(itemId))
                 .findFirst()
                 .orElseThrow(() -> new ItemNotFoundException("No item found with ID: " + itemId));
 
