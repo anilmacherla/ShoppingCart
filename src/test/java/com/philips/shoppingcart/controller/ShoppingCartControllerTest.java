@@ -68,12 +68,40 @@ class ShoppingCartControllerTest {
     void testGetCartByUserId() throws Exception {
         Long userId = 1L;
         CartDTO cartDTO = new CartDTO();
-
-        when(cartService.getCartListByUserId(userId)).thenReturn(List.of( cartDTO));
+        cartDTO.setCartId(1L);
+        CartItemDTO item1 = new CartItemDTO(1L, "Item 4", 10.99, 2);
+        CartItemDTO item2 = new CartItemDTO(2L, "Item 5", 5.49, 3);
+        CartItemDTO item3 = new CartItemDTO(3L, "Item 6", 7.99, 1);
+        cartDTO.setItems(List.of(item1, item2, item3));
+        when(cartService.getCartListByUserId(userId)).thenReturn(List.of(cartDTO));
 
         mockMvc.perform(get("/api/cart/{userId}", userId))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{}"));
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"cartId\": 1,\n" +
+                        "        \"items\": [\n" +
+                        "            {\n" +
+                        "                \"name\": \"Item 4\",\n" +
+                        "                \"price\": 10.99,\n" +
+                        "                \"quantity\": 2,\n" +
+                        "                \"id\": 1\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"name\": \"Item 5\",\n" +
+                        "                \"price\": 5.49,\n" +
+                        "                \"quantity\": 3,\n" +
+                        "                \"id\": 2\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"name\": \"Item 6\",\n" +
+                        "                \"price\": 7.99,\n" +
+                        "                \"quantity\": 1,\n" +
+                        "                \"id\": 3\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    }\n" +
+                        "]"));
 
         verify(cartService, times(1)).getCartListByUserId(userId);
     }

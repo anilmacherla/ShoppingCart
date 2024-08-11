@@ -4,6 +4,16 @@ import jakarta.validation.constraints.*;
 
 public class CartItemDTO {
     private Long cartItemId;
+
+    public CartItemDTO(Long cartItemId, String name, double price, int quantity) {
+        this.cartItemId = cartItemId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public CartItemDTO(){}
+
     @NotBlank(message = "Name is mandatory")
     private String name;
     @NotNull(message = "Price is mandatory")
